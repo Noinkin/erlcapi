@@ -1,0 +1,48 @@
+---
+title: Accessing the Cache
+description: Access the cache and all data stored in it.
+---
+
+Caching is used throughout to store the latest data fetched using polling. This data can be found in each respective manager class. As this data is updated from polling, it is at most 5 seconds old.
+
+## Players
+
+`client.players.cache` is where all players are stored as instances of the `Player` class.
+
+## Vehicles
+
+`client.vehicles.cache` is where all vehicles are stored as instances of the `Vehicle` class.
+
+## Command Logs
+
+`client.commandLogs.cache` is where all command logs are stored as instances of the `CommandLog` class.
+
+## Emergency Calls
+
+`client.emergencyCalls.cache` is where all emergency calls are stored as instances of the `EmergencyCall` class.
+
+## Kill Logs
+
+`client.killLogs.cache` is where all kill logs are stored as instances of the `KillLog` class.
+
+## Mod Calls
+
+`client.modCalls.cache` is where all mod calls are stored as instances of the `ModCall` class.
+
+## Server Information
+
+`client.server.cache` is where all server information is stored. This includes:
+- `name` - Server Name
+- `ownerId` - Server Owner Id
+- `coOwnerIds` - Array of Co-Owner Ids
+- `currentPlayers` - Current number of players in the server
+- `maxPlayers` - Maximum number of players in the server
+- `joinKey` - The server join code
+- `accVerifiedReq` - The server account requirement
+- `teamBalance` - A boolean whether team balance is enabled
+- `queue` - An array of all user ids currently in the queue
+
+
+
+
+

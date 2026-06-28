@@ -25,6 +25,7 @@ export default defineConfig({
 						{ label: 'Managing Players', slug: 'guides/players' },
 						{ label: 'Server & Command Management', slug: 'guides/server-commands' },
 						{ label: 'Handling Events', slug: 'guides/events' },
+                        { label: 'Accessing the Cache', slug: 'guides/cache' },
 					],
 				},
 				{
