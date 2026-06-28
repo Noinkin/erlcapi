@@ -27,7 +27,6 @@ export class RestManager {
      * @throws Error - for other HTTP error codes.
      */
     public async request(method: 'GET' | 'POST', endpoint: string, body?: any): Promise<any> {
-        console.log(method, endpoint, body)
         return new Promise((resolve, reject) => {
             this.queue.push(async () => {
                 try {
@@ -89,4 +88,4 @@ export class RestManager {
 
         this.processing = false;
     }
-}
+}

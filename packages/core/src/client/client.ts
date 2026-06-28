@@ -155,12 +155,10 @@ export class Client extends EventEmitter<ClientEvents> {
      * Starts the periodic api-polling loop if enabled.
      */
     private startPolling() {
-        console.log('begin polling')
         setInterval(async () => {
             try {
                 const server = await this.server.fetch();
                 this.emit(ERLCEvents.poll, server);
-                console.log('fetch')
                 if (server.Players) this.players.updateCache(server.Players);
                 if (server.Vehicles) this.vehicles.updateCache(server.Vehicles);
                 if (server.CommandLogs) this.commandLogs.updateCache(server.CommandLogs);
@@ -172,4 +170,4 @@ export class Client extends EventEmitter<ClientEvents> {
             }
         }, 5000);
     }
-}
+}

@@ -102,7 +102,7 @@ console.log(`Vehicle model: ${vehicle.name}, Owner: ${vehicle.ownerUsername}`);
 ### Executing Commands
 Issue custom commands directly:
 ```typescript
-await client.commands.execute(':heal jamie');
+await client.commands.execute(':heal user');
 ```
 
 ## Documentation
