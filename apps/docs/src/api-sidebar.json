@@ -1,0 +1,130 @@
+[
+  {
+    "label": "HASH",
+    "items": [
+      {
+        "label": "Hash Package",
+        "slug": "api/hash"
+      },
+      {
+        "label": "Hash variable",
+        "slug": "api/hash/hash"
+      },
+      {
+        "label": "SysteHash",
+        "slug": "api/hash/systehash"
+      }
+    ]
+  },
+  {
+    "label": "IMAGE",
+    "items": [
+      {
+        "label": "Image Package",
+        "slug": "api/image"
+      },
+      {
+        "label": "create() function",
+        "slug": "api/image/create"
+      },
+      {
+        "label": "fromBuffer() function",
+        "slug": "api/image/frombuffer"
+      },
+      {
+        "label": "fromFile() function",
+        "slug": "api/image/fromfile"
+      },
+      {
+        "label": "ImageFormat enum",
+        "slug": "api/image/imageformat"
+      },
+      {
+        "label": "SysteImage",
+        "slug": "api/image/systeimage"
+      }
+    ]
+  },
+  {
+    "label": "MATH",
+    "items": [
+      {
+        "label": "Math Package",
+        "slug": "api/math"
+      },
+      {
+        "label": "MathCtx variable",
+        "slug": "api/math/mathctx"
+      },
+      {
+        "label": "Matrix2",
+        "slug": "api/math/matrix2"
+      },
+      {
+        "label": "Matrix2F32",
+        "slug": "api/math/matrix2f32"
+      },
+      {
+        "label": "Matrix3",
+        "slug": "api/math/matrix3"
+      },
+      {
+        "label": "Matrix3F32",
+        "slug": "api/math/matrix3f32"
+      },
+      {
+        "label": "Matrix4",
+        "slug": "api/math/matrix4"
+      },
+      {
+        "label": "Matrix4F32",
+        "slug": "api/math/matrix4f32"
+      },
+      {
+        "label": "SysteMathContext",
+        "slug": "api/math/systemathcontext"
+      },
+      {
+        "label": "Vector2",
+        "slug": "api/math/vector2"
+      },
+      {
+        "label": "Vector2F32",
+        "slug": "api/math/vector2f32"
+      },
+      {
+        "label": "Vector3",
+        "slug": "api/math/vector3"
+      },
+      {
+        "label": "Vector3F32",
+        "slug": "api/math/vector3f32"
+      }
+    ]
+  },
+  {
+    "label": "SEARCH",
+    "items": [
+      {
+        "label": "Search Package",
+        "slug": "api/search"
+      },
+      {
+        "label": "Search variable",
+        "slug": "api/search/search"
+      },
+      {
+        "label": "SearchEngine enum",
+        "slug": "api/search/searchengine"
+      },
+      {
+        "label": "SearchResult",
+        "slug": "api/search/searchresult"
+      },
+      {
+        "label": "SysteSearch",
+        "slug": "api/search/systesearch"
+      }
+    ]
+  }
+]
