@@ -2,9 +2,16 @@
   "name": "@erlcjs/core",
   "description": "ERLC API Wrapper Core",
   "version": "1.0.0",
-  "type": "module",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
   "homepage": "noinkin.github.io/erlcapi",
   "files": [
     "dist"
@@ -14,15 +21,9 @@
     "url": "git+https://github.com/noinkin/erlcapi.git",
     "directory": "packages/core"
   },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
-  },
   "license": "Apache-2.0",
   "scripts": {
-    "build": "tsc",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
     "lint": "eslint src/**/*.ts",
     "extract": "api-extractor run --local",
     "test": "pnpm tsx --env-file-if-exists=../../.env src/index.test.ts",
@@ -30,5 +31,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1"
   }
 }

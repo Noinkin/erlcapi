@@ -6,7 +6,6 @@ export * from './gateway/webhookserver.js';
 
 // REST
 export * from './rest/manager.js';
-export * from './rest/ratelimiter.js';
 
 // Managers
 export * from './managers/commandmanager.js';

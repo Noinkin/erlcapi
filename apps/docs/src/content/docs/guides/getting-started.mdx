@@ -31,7 +31,7 @@ Follow these steps to get your first script running in minutes.
     cd erlc-bot
     npm init -y
     ```
-    Configure your `package.json` to use ES modules by adding `"type": "module"`.
+    It is recommend to configure your `package.json` to use ES modules by adding `"type": "module"`.
 
 3.  ### Install ERLCjs
 
@@ -57,28 +57,57 @@ Follow these steps to get your first script running in minutes.
 4.  ### Write Your First Script
 
     Create a file named `index.js` and paste the following code:
-    ```javascript
-    import { Client, ERLCEvents } from '@erlcjs/core';
+    <Tabs>
+        <TabItem label="esm">
+            ```javascript
+            import { Client, ERLCEvents } from '@erlcjs/core';
 
-    // Initialize the ERLCjs Client
-    const client = new Client({
-        serverKey: 'YOUR_SERVER_API_KEY', // Replace with your copied key
-        polling: true // Enable periodic polling
-    });
+            // Initialize the ERLCjs Client
+            const client = new Client({
+                serverKey: 'YOUR_SERVER_API_KEY', // Replace with your copied key
+                polling: true // Enable periodic polling
+            });
 
-    // Listen for the player join event
-    client.on(ERLCEvents.playerJoin, (player) => {
-        console.log(`[JOIN] ${player.username} has entered the server!`);
-        player.message('Welcome to our private server! Have fun.');
-    });
+            // Listen for the player join event
+            client.on(ERLCEvents.playerJoin, (player) => {
+                console.log(`[JOIN] ${player.username} has entered the server!`);
+                player.message('Welcome to our private server! Have fun.');
+            });
 
-    // Handle connection/API errors
-    client.on('error', (err) => {
-        console.error('An API error occurred:', err);
-    });
+            // Handle connection/API errors
+            client.on('error', (err) => {
+                console.error('An API error occurred:', err);
+            });
 
-    console.log('ERLCjs bot is running...');
-    ```
+            console.log('ERLCjs bot is running...');
+            ```
+        </TabItem>
+        <TabItem label="cjs">
+            ```javascript
+            const { Client, ERLCEvents } = require('@erlcjs/core');
+
+            // Initialize the ERLCjs Client
+            const client = new Client({
+                serverKey: 'YOUR_SERVER_API_KEY', // Replace with your copied key
+                polling: true // Enable periodic polling
+            });
+
+            // Listen for the player join event
+            client.on(ERLCEvents.playerJoin, (player) => {
+                console.log(`[JOIN] ${player.username} has entered the server!`);
+                player.message('Welcome to our private server! Have fun.');
+            });
+
+            // Handle connection/API errors
+            client.on('error', (err) => {
+                console.error('An API error occurred:', err);
+            });
+
+            console.log('ERLCjs bot is running...');
+            ```
+        </TabItem>
+    </Tabs>
+    
 
 5.  ### Run the Script
 
