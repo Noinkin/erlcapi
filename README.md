@@ -1,6 +1,6 @@
-# ERLCApi Monorepo
+# ERLCjs Monorepo
 
-Welcome to **ERLCApi**, a modern, fully-typed, high-performance TypeScript/JavaScript monorepo for wrapping and interacting with the Roblox **Emergency Response: Liberty County (ER:LC)** private server API.
+Welcome to **ERLCjs**, a modern, fully-typed, high-performance TypeScript/JavaScript monorepo for wrapping and interacting with the Roblox **Emergency Response: Liberty County (ER:LC)** private server API.
 
 ## Project Structure
 
