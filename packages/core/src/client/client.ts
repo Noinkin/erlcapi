@@ -2,17 +2,20 @@ import { EventEmitter } from 'node:events';
 import { type ClientOptions } from '../types/index.js';
 import { RestManager } from '../rest/manager.js';
 import { PlayerManager } from '../managers/playermanager.js';
+import { CommandManager } from '../managers/commandmanager.js';
 import { WebhookServer } from '../gateway/webhookserver.js';
 
 export class Client extends EventEmitter {
     public rest: RestManager;
     public players: PlayerManager;
+    public commands: CommandManager;
     private readonly gateway?: WebhookServer;
 
     constructor(public options: ClientOptions) {
         super();
         this.rest = new RestManager(options);
         this.players = new PlayerManager(this);
+        this.commands = new CommandManager(this);
 
         if (options.webhook?.enabled) {
             this.gateway = new WebhookServer(this);
