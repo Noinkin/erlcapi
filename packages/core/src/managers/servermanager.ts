@@ -2,11 +2,27 @@ import { Client, ERLCEvents } from "../client/client.js";
 import type { RawServerData } from "../types/index.js";
 import { Server } from "../structures/server.js";
 
+/**
+ * Manager responsible for fetching and caching the ER:LC Server details.
+ * @public
+ */
 export class ServerManager {
+    /**
+     * Cached Server structure instance, if fetched.
+     */
     public cache?: Server;
 
+    /**
+     * Creates an instance of ServerManager.
+     * @param client - The ERLCApi client.
+     */
     constructor(private readonly client: Client) {};
     
+    /**
+     * Fetches current server information from the API.
+     * Patches the cache and emits event updates if there are changes.
+     * @returns A promise resolving to the raw server data from the API.
+     */
     public async fetch() {
         const rawServerData: RawServerData = await this.client.rest.request('GET', '/v2/server?Players=true&Vehicles=true&Staff=true&JoinLogs=true&Queue=true&KillLogs=true&CommandLogs=true&ModCalls=true&EmergencyCalls=true');
 
@@ -22,4 +38,4 @@ export class ServerManager {
 
         return rawServerData;
     }
-}
+}

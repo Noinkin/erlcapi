@@ -18,60 +18,117 @@ import { ModCall } from '../structures/modcall.js';
 import { EmergencyCall } from '../structures/emergencycall.js';
 import type { KillLog } from '../structures/killlog.js';
 
+/**
+ * Event names emitted by the ERLCApi Client.
+ * @public
+ */
 export enum ERLCEvents {
+    /** Emitted when a periodic server poll finishes. */
     poll = 'POLL',
+    /** Emitted when server details are updated. */
     serverUpdate = 'SERVER_UPDATE',
+    /** Emitted when server details are first loaded. */
     serverCreate = 'SERVER_CREATE',
+    /** Emitted when a player joins the server. */
     playerJoin = 'PLAYER_JOIN',
+    /** Emitted when a player's data (e.g. location, team) updates. */
     playerUpdate = 'PLAYER_UPDATE',
+    /** Emitted when a player leaves the server. */
     playerLeave = 'PLAYER_LEAVE',
+    /** Emitted when a vehicle is spawned. */
     vehicleAdd = 'VEHICLE_ADD',
+    /** Emitted when a vehicle is despawned. */
     vehicleRemove = 'VEHICLE_REMOVE',
+    /** Emitted when a vehicle's data updates. */
     vehicleUpdate = 'VEHICLE_UPDATE',
+    /** Emitted when a server command is run. */
     command = 'COMMAND',
+    /** Emitted when a player requests moderator assistance. */
     modCall = 'MOD_CALL',
+    /** Emitted when a player is killed. */
     kill = 'KILL',
+    /** Emitted when an emergency call is created. */
     emergencyCallAdd = 'EMERGENCY_CALL_ADD',
+    /** Emitted when an emergency call is cleared. */
     emergencyCallRemove = 'EMERGENCY_CALL_REMOVE',
+    /** Emitted when an emergency call is updated. */
     emergencyCallUpdate = 'EMERGENCY_CALL_UPDATE',
 }
 
+/**
+ * Interface mapping client event names to their callback parameters.
+ * @public
+ */
 export interface ClientEvents {
+    /** Emitted when a periodic server poll finishes. */
     [ERLCEvents.poll]: [server: RawServerData];
+    /** Emitted when server details are updated. */
     [ERLCEvents.serverUpdate]: [oldServer: Server | null, newServer: Server];
+    /** Emitted when server details are first loaded. */
     [ERLCEvents.serverCreate]: [server: Server];
     
+    /** Emitted when a player joins the server. */
     [ERLCEvents.playerJoin]: [player: Player];
+    /** Emitted when a player's data updates. */
     [ERLCEvents.playerUpdate]: [oldPlayer: Player | null, newPlayer: Player];
+    /** Emitted when a player leaves the server. */
     [ERLCEvents.playerLeave]: [player: Player];
     
+    /** Emitted when a vehicle is spawned. */
     [ERLCEvents.vehicleAdd]: [vehicle: Vehicle];
+    /** Emitted when a vehicle is despawned. */
     [ERLCEvents.vehicleRemove]: [vehicle: Vehicle];
+    /** Emitted when a vehicle's data updates. */
     [ERLCEvents.vehicleUpdate]: [oldVehicle: Vehicle | null, newVehicle: Vehicle];
     
+    /** Emitted when a server command is run. */
     [ERLCEvents.command]: [log: CommandLog];
+    /** Emitted when a player requests moderator assistance. */
     [ERLCEvents.modCall]: [call: ModCall];
+    /** Emitted when a player is killed. */
     [ERLCEvents.kill]: [kill: KillLog];
     
+    /** Emitted when an emergency call is created. */
     [ERLCEvents.emergencyCallAdd]: [call: EmergencyCall];
+    /** Emitted when an emergency call is cleared. */
     [ERLCEvents.emergencyCallRemove]: [call: EmergencyCall];
+    /** Emitted when an emergency call is updated. */
     [ERLCEvents.emergencyCallUpdate]: [oldCall: EmergencyCall | null, newCall: EmergencyCall];
     
+    /** Emitted when an error is caught during polling or gateway operations. */
     error: [error: unknown];
 }
 
+/**
+ * The main client for interacting with the ER:LC API and gateway.
+ * @public
+ */
 export class Client extends EventEmitter<ClientEvents> {
+    /** REST Manager for sending manual requests to the ER:LC API. */
     public rest: RestManager;
+    /** Manager for fetching and caching general server configuration. */
     public server: ServerManager;
+    /** Manager for player caching, joining, and management actions. */
     public players: PlayerManager;
+    /** Manager for executing server-side console commands. */
     public commands: CommandManager;
+    /** Manager for spawned vehicles cache and events. */
     public vehicles: VehicleManager;
+    /** Manager for command execution log events. */
     public commandLogs: CommandLogManager;
+    /** Manager for active emergency calls. */
     public emergencyCalls: EmergencyCallManager;
+    /** Manager for kill logs. */
     public killLogs: KillLogManager;
+    /** Manager for moderator call logs. */
     public modCalls: ModCallManager;
+    /** Webhook Gateway server instance, if enabled. */
     private readonly gateway?: WebhookServer;
 
+    /**
+     * Creates an instance of Client.
+     * @param options - The ClientOptions configuration.
+     */
     constructor(public options: ClientOptions) {
         super();
         this.rest = new RestManager(options);
@@ -94,6 +151,9 @@ export class Client extends EventEmitter<ClientEvents> {
         }
     }
 
+    /**
+     * Starts the periodic api-polling loop if enabled.
+     */
     private startPolling() {
         console.log('begin polling')
         setInterval(async () => {
@@ -112,4 +172,4 @@ export class Client extends EventEmitter<ClientEvents> {
             }
         }, 5000);
     }
-}
+}

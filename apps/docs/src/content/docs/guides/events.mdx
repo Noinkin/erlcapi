@@ -1,0 +1,83 @@
+---
+title: Handling Events
+description: Full reference of all real-time events emitted by the ERLCApi Client.
+---
+
+When polling or gateway modes are active, ERLCApi parses raw updates and emits events. You can subscribe to these events using standard Node.js event emitter syntax (`client.on`).
+
+## Event Usage
+
+Import the `ERLCEvents` enum to safely listen to client updates:
+
+```javascript
+import { Client, ERLCEvents } from '@erlcjs/core';
+
+const client = new Client({ serverKey: 'YOUR_KEY', polling: true });
+
+client.on(ERLCEvents.playerJoin, (player) => {
+    console.log(`${player.username} joined!`);
+});
+```
+
+---
+
+## Events Reference
+
+Here is the full list of events emitted by ERLCApi.
+
+### Server State Events
+
+*   **`ERLCEvents.poll`**
+    *   **Description:** Emitted every time a poll completes successfully.
+    *   **Parameters:** `[server: RawServerData]`
+*   **`ERLCEvents.serverCreate`**
+    *   **Description:** Emitted when server information is loaded for the first time.
+    *   **Parameters:** `[server: Server]`
+*   **`ERLCEvents.serverUpdate`**
+    *   **Description:** Emitted when server details (e.g. name, players count, verified role requirement) change.
+    *   **Parameters:** `[oldServer: Server | null, newServer: Server]`
+
+### Player Events
+
+*   **`ERLCEvents.playerJoin`**
+    *   **Description:** Emitted when a player connects to the server.
+    *   **Parameters:** `[player: Player]`
+*   **`ERLCEvents.playerUpdate`**
+    *   **Description:** Emitted when a player's in-game properties (such as position, team, wanted stars) update.
+    *   **Parameters:** `[oldPlayer: Player | null, newPlayer: Player]`
+*   **`ERLCEvents.playerLeave`**
+    *   **Description:** Emitted when a player disconnects from the server.
+    *   **Parameters:** `[player: Player]`
+
+### Vehicle Events
+
+*   **`ERLCEvents.vehicleAdd`**
+    *   **Description:** Emitted when a vehicle is spawned.
+    *   **Parameters:** `[vehicle: Vehicle]`
+*   **`ERLCEvents.vehicleUpdate`**
+    *   **Description:** Emitted when a vehicle's properties (such as custom texture or color) change.
+    *   **Parameters:** `[oldVehicle: Vehicle | null, newVehicle: Vehicle]`
+*   **`ERLCEvents.vehicleRemove`**
+    *   **Description:** Emitted when a vehicle is despawned/removed.
+    *   **Parameters:** `[vehicle: Vehicle]`
+
+### Log & Call Events
+
+*   **`ERLCEvents.command`**
+    *   **Description:** Emitted when any player executes an administrative command.
+    *   **Parameters:** `[log: CommandLog]`
+*   **`ERLCEvents.kill`**
+    *   **Description:** Emitted when a player dies or is killed.
+    *   **Parameters:** `[kill: KillLog]`
+*   **`ERLCEvents.modCall`**
+    *   **Description:** Emitted when a player calls for a moderator (`/modcall`).
+    *   **Parameters:** `[call: ModCall]`
+*   **`ERLCEvents.emergencyCallAdd`**
+    *   **Description:** Emitted when a new emergency call (911 call) is placed.
+    *   **Parameters:** `[call: EmergencyCall]`
+*   **`ERLCEvents.emergencyCallUpdate`**
+    *   **Description:** Emitted when responders are assigned or location updates on an emergency call.
+    *   **Parameters:** `[oldCall: EmergencyCall | null, newCall: EmergencyCall]`
+*   **`ERLCEvents.emergencyCallRemove`**
+    *   **Description:** Emitted when an emergency call is cleared.
+    *   **Parameters:** `[call: EmergencyCall]`

@@ -3,23 +3,67 @@ import { Base } from "./base.js";
 import type { RawEmergencyCall } from "../types/index.js";
 import { Player } from "./player.js";
 
+/**
+ * Represents an active emergency call in the ER:LC server.
+ * @public
+ */
 export class EmergencyCall extends Base {
+    /**
+     * The Player instance representing the caller.
+     */
     caller!: Player;
+    /**
+     * The UserId of the player who made the emergency call.
+     */
     callerId!: number;
+    /**
+     * The team associated with the emergency call (e.g., "Police", "Fire").
+     */
     team!: string;
+    /**
+     * Array of UserIds of responders assigned to this call.
+     */
     playerIds!: number[];
+    /**
+     * Array of Player instances of active responders assigned to this call.
+     */
     players!: Player[];
+    /**
+     * The game position coordinates [x, y] of the call.
+     */
     position!: number[];
+    /**
+     * Unix timestamp of when the call was started.
+     */
     startedAt!: number;
+    /**
+     * The unique call number.
+     */
     callNumber!: number;
+    /**
+     * The description text of the emergency call.
+     */
     description!: string;
+    /**
+     * Positional description of where the call was made.
+     */
     positionDescriptor!: string;
     
+    /**
+     * Creates an instance of EmergencyCall.
+     * @param client - The ERLCApi client.
+     * @param data - The raw emergency call data to initialize.
+     */
     constructor(client: Client, data: RawEmergencyCall) {
         super(client);
         this._patch(data);
     }
 
+    /**
+     * Patches the EmergencyCall structure with new raw data.
+     * @param data - The new raw emergency call data.
+     * @returns This emergency call instance.
+     */
     public _patch(data: RawEmergencyCall): this {
         this.callerId = data.Caller;
         this.caller = this.client.players.cache.get(this.callerId)!;
@@ -38,6 +82,10 @@ export class EmergencyCall extends Base {
         return this;
     }
 
+    /**
+     * Converts this EmergencyCall instance to raw JSON representation.
+     * @returns The raw emergency call data.
+     */
     public toJSON(): RawEmergencyCall {
         return {
             Caller: this.callerId,
@@ -50,4 +98,4 @@ export class EmergencyCall extends Base {
             PositionDescriptor: this.positionDescriptor,
         }
     }
-}
+}

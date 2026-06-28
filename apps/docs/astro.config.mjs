@@ -21,6 +21,10 @@ export default defineConfig({
 					label: 'Guides',
 					items: [
 						{ label: 'Getting Started', slug: 'guides/getting-started' },
+						{ label: 'Instantiating Client', slug: 'guides/client' },
+						{ label: 'Managing Players', slug: 'guides/players' },
+						{ label: 'Server & Command Management', slug: 'guides/server-commands' },
+						{ label: 'Handling Events', slug: 'guides/events' },
 					],
 				},
 				{

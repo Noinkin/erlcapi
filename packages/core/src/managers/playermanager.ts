@@ -2,12 +2,28 @@ import { Client, ERLCEvents } from '../client/client.js';
 import { Player } from '../structures/player.js';
 import { type RawPlayerData, type RawServerData } from '../types/index.js';
 
+/**
+ * Manager responsible for fetching, caching, and updating Player structures.
+ * @public
+ */
 export class PlayerManager {
+    /**
+     * Map cache of online Players, keyed by their UserId.
+     */
     public cache = new Map<number, Player>();
     private nameToId = new Map<string, number>();
 
+    /**
+     * Creates an instance of PlayerManager.
+     * @param client - The ERLCApi client.
+     */
     constructor(private readonly client: Client) {}
 
+    /**
+     * Fetches all active players currently in the game server.
+     * Updates the player cache.
+     * @returns A promise resolving to a Map of active Players.
+     */
     public async fetchAll(): Promise<Map<number, Player>> {
         const rawServer: RawServerData = await this.client.rest.request('GET', '/v2/server?Players=true');
         const rawPlayers: RawPlayerData[] = rawServer.Players ?? [];
@@ -15,6 +31,12 @@ export class PlayerManager {
         return this.updateCache(rawPlayers);
     }
 
+    /**
+     * Re-synchronizes the cache with the raw player list from the API.
+     * Emits playerJoin, playerLeave, and playerUpdate events.
+     * @param rawPlayers - Raw player list payload.
+     * @returns The updated Player cache Map.
+     */
     public updateCache(rawPlayers: RawPlayerData[]) {
         const activeIds = new Set<number>();
         const activeUsers = new Set<string>();
@@ -52,10 +74,16 @@ export class PlayerManager {
         return this.cache;
     }
 
+    /**
+     * Retrieves a player's UserId from their Roblox username.
+     * Attempts to resolve from cache first, otherwise triggers a fresh fetch.
+     * @param name - The Roblox username.
+     * @returns The UserId if resolved, otherwise undefined.
+     */
     public getIdFromName(name: string) {
         if (this.nameToId.has(name)) return this.nameToId.get(name);
         this.fetchAll().then(() => {
             return this.nameToId.get(name);
         })
     }
-}
+}

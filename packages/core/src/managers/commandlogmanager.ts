@@ -2,11 +2,27 @@ import { Client, ERLCEvents } from '../client/client.js';
 import { CommandLog } from '../structures/commandlog.js';
 import { type RawCommandLog, type RawServerData } from '../types/index.js';
 
+/**
+ * Manager responsible for fetching, caching, and updating CommandLog structures.
+ * @public
+ */
 export class CommandLogManager {
+    /**
+     * Map cache of logged commands, keyed by a composite `Player:Timestamp` key.
+     */
     public cache = new Map<string, CommandLog>();
 
+    /**
+     * Creates an instance of CommandLogManager.
+     * @param client - The ERLCApi client.
+     */
     constructor(private readonly client: Client) {}
 
+    /**
+     * Fetches all command logs from the game server.
+     * Updates the command log cache.
+     * @returns A promise resolving to a Map of CommandLogs.
+     */
     public async fetchAll(): Promise<Map<string, CommandLog>> {
         const rawServer: RawServerData = await this.client.rest.request('GET', '/v2/server?CommandLogs=true');
         const rawCommands: RawCommandLog[] = rawServer.CommandLogs ?? [];
@@ -14,6 +30,12 @@ export class CommandLogManager {
         return this.updateCache(rawCommands);
     }
 
+    /**
+     * Re-synchronizes the cache with the raw command logs.
+     * Emits command event for new logs.
+     * @param rawCommands - Raw command logs payload.
+     * @returns The updated CommandLog cache Map.
+     */
     public updateCache(rawCommands: RawCommandLog[]) {
         for (const rawData of rawCommands) {
             const key = `${rawData.Player}:${rawData.Timestamp}`
@@ -28,4 +50,4 @@ export class CommandLogManager {
 
         return this.cache;
     }
-}
+}

@@ -3,20 +3,55 @@ import { Base } from "./base.js";
 import type { RawKillLog } from "../types/index.js";
 import { Player } from "./player.js";
 
+/**
+ * Represents a log of a player death event (kill).
+ * @public
+ */
 export class KillLog extends Base {
+    /**
+     * The Player instance representing the player who was killed.
+     */
     killed!: Player;
+    /**
+     * The UserId of the player who was killed.
+     */
     killedId!: number;
+    /**
+     * The Roblox username of the player who was killed.
+     */
     killedUsername!: string;
+    /**
+     * The Player instance representing the player who did the killing.
+     */
     killer!: Player;
+    /**
+     * The UserId of the player who did the killing.
+     */
     killerId!: number;
+    /**
+     * The Roblox username of the player who did the killing.
+     */
     killerUsername!: string;
+    /**
+     * Unix timestamp of when the kill occurred.
+     */
     timestamp!: number;
     
+    /**
+     * Creates an instance of KillLog.
+     * @param client - The ERLCApi client.
+     * @param data - The raw kill log data.
+     */
     constructor(client: Client, data: RawKillLog) {
         super(client);
         this._patch(data);
     }
 
+    /**
+     * Patches the KillLog structure with new raw data.
+     * @param data - The new raw kill log data.
+     * @returns This kill log instance.
+     */
     public _patch(data: RawKillLog): this {
         const splitKilled = data.Killed.split(':');
         const splitKiller = data.Killer.split(':');
@@ -30,6 +65,10 @@ export class KillLog extends Base {
         return this;
     }
 
+    /**
+     * Converts this KillLog instance to raw JSON representation.
+     * @returns The raw kill log data.
+     */
     public toJSON(): RawKillLog {
         return {
             Killed: `${this.killedUsername}:${this.killedId}`,
@@ -37,4 +76,4 @@ export class KillLog extends Base {
             Timestamp: this.timestamp,
         }
     }
-}
+}

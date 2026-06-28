@@ -2,11 +2,27 @@ import { Client, ERLCEvents } from "../client/client.js";
 import { Vehicle } from "../structures/vehicle.js";
 import type { RawServerData, RawVehicle } from "../types/index.js";
 
+/**
+ * Manager responsible for fetching, caching, and updating Vehicle structures.
+ * @public
+ */
 export class VehicleManager {
+    /**
+     * Map cache of spawned vehicles in the server, keyed by their license plate.
+     */
     public cache = new Map<string, Vehicle>();
 
+    /**
+     * Creates an instance of VehicleManager.
+     * @param client - The ERLCApi client.
+     */
     constructor(private readonly client: Client) {};
 
+    /**
+     * Fetches all active vehicles currently spawned in the game server.
+     * Updates the vehicle cache.
+     * @returns A promise resolving to a Map of active Vehicles.
+     */
     public async fetchAll(): Promise<Map<string, Vehicle>> {
         const rawServer: RawServerData = await this.client.rest.request('GET', '/v2/server?Vehicles=true');
         const rawVehicles: RawVehicle[] = rawServer.Vehicles ?? [];
@@ -14,10 +30,16 @@ export class VehicleManager {
         return this.updateCache(rawVehicles);
     }
 
-    public updateCache(rawPlayers: RawVehicle[]) {
+    /**
+     * Re-synchronizes the cache with the raw vehicle list from the API.
+     * Emits vehicleAdd, vehicleRemove, and vehicleUpdate events.
+     * @param rawVehicles - Raw vehicle list payload.
+     * @returns The updated Vehicle cache Map.
+     */
+    public updateCache(rawVehicles: RawVehicle[]) {
         const activePlates = new Set<string>();
 
-        for (const rawData of rawPlayers) {
+        for (const rawData of rawVehicles) {
             const plate = rawData.Plate
             activePlates.add(plate);
             const cachedVehicle = this.cache.get(plate);
@@ -42,4 +64,4 @@ export class VehicleManager {
 
         return this.cache;
     }
-}
+}

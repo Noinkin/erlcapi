@@ -4,6 +4,368 @@
 
 ```ts
 
+import { EventEmitter } from 'node:events';
+
+// @public
+export class Base {
+    constructor(client: Client);
+    // (undocumented)
+    readonly client: Client;
+}
+
+// @public
+export class Client extends EventEmitter<ClientEvents> {
+    constructor(options: ClientOptions);
+    commandLogs: CommandLogManager;
+    commands: CommandManager;
+    emergencyCalls: EmergencyCallManager;
+    killLogs: KillLogManager;
+    modCalls: ModCallManager;
+    // (undocumented)
+    options: ClientOptions;
+    players: PlayerManager;
+    rest: RestManager;
+    server: ServerManager;
+    vehicles: VehicleManager;
+}
+
+// @public
+export interface ClientEvents {
+    [ERLCEvents.command]: [log: CommandLog];
+    [ERLCEvents.emergencyCallAdd]: [call: EmergencyCall];
+    [ERLCEvents.emergencyCallRemove]: [call: EmergencyCall];
+    [ERLCEvents.emergencyCallUpdate]: [oldCall: EmergencyCall | null, newCall: EmergencyCall];
+    error: [error: unknown];
+    [ERLCEvents.kill]: [kill: KillLog];
+    [ERLCEvents.modCall]: [call: ModCall];
+    [ERLCEvents.playerJoin]: [player: Player];
+    [ERLCEvents.playerLeave]: [player: Player];
+    [ERLCEvents.playerUpdate]: [oldPlayer: Player | null, newPlayer: Player];
+    [ERLCEvents.poll]: [server: RawServerData];
+    [ERLCEvents.serverCreate]: [server: Server];
+    [ERLCEvents.serverUpdate]: [oldServer: Server | null, newServer: Server];
+    [ERLCEvents.vehicleAdd]: [vehicle: Vehicle];
+    [ERLCEvents.vehicleRemove]: [vehicle: Vehicle];
+    [ERLCEvents.vehicleUpdate]: [oldVehicle: Vehicle | null, newVehicle: Vehicle];
+}
+
+// @public
+export interface ClientOptions {
+    globalKey?: string;
+    polling?: boolean;
+    serverKey: string;
+    webhook?: {
+        enabled: boolean;
+        port: number;
+        path?: string;
+        secret?: string;
+    };
+}
+
+// @public
+export class CommandLog extends Base {
+    constructor(client: Client, data: RawCommandLog);
+    command: string;
+    _patch(data: RawCommandLog): this;
+    player: Player;
+    playerId: number;
+    playerUsername: string;
+    timestamp: number;
+    toJSON(): RawCommandLog;
+}
+
+// @public
+export class CommandLogManager {
+    constructor(client: Client);
+    cache: Map<string, CommandLog>;
+    fetchAll(): Promise<Map<string, CommandLog>>;
+    updateCache(rawCommands: RawCommandLog[]): Map<string, CommandLog>;
+}
+
+// @public
+export class CommandManager {
+    constructor(client: Client);
+    execute(command: string): Promise<string>;
+}
+
+// @public
+export class EmergencyCall extends Base {
+    constructor(client: Client, data: RawEmergencyCall);
+    caller: Player;
+    callerId: number;
+    callNumber: number;
+    description: string;
+    _patch(data: RawEmergencyCall): this;
+    playerIds: number[];
+    players: Player[];
+    position: number[];
+    positionDescriptor: string;
+    startedAt: number;
+    team: string;
+    toJSON(): RawEmergencyCall;
+}
+
+// @public
+export class EmergencyCallManager {
+    constructor(client: Client);
+    cache: Map<number, EmergencyCall>;
+    fetchAll(): Promise<Map<number, EmergencyCall>>;
+    updateCache(rawCalls: RawEmergencyCall[]): Map<number, EmergencyCall>;
+}
+
+// @public
+export enum ERLCEvents {
+    command = "COMMAND",
+    emergencyCallAdd = "EMERGENCY_CALL_ADD",
+    emergencyCallRemove = "EMERGENCY_CALL_REMOVE",
+    emergencyCallUpdate = "EMERGENCY_CALL_UPDATE",
+    kill = "KILL",
+    modCall = "MOD_CALL",
+    playerJoin = "PLAYER_JOIN",
+    playerLeave = "PLAYER_LEAVE",
+    playerUpdate = "PLAYER_UPDATE",
+    poll = "POLL",
+    serverCreate = "SERVER_CREATE",
+    serverUpdate = "SERVER_UPDATE",
+    vehicleAdd = "VEHICLE_ADD",
+    vehicleRemove = "VEHICLE_REMOVE",
+    vehicleUpdate = "VEHICLE_UPDATE"
+}
+
+// @public
+export class InvalidServerKeyError extends Error {
+    constructor(message?: string);
+}
+
+// @public
+export class KillLog extends Base {
+    constructor(client: Client, data: RawKillLog);
+    killed: Player;
+    killedId: number;
+    killedUsername: string;
+    killer: Player;
+    killerId: number;
+    killerUsername: string;
+    _patch(data: RawKillLog): this;
+    timestamp: number;
+    toJSON(): RawKillLog;
+}
+
+// @public
+export class KillLogManager {
+    constructor(client: Client);
+    cache: Map<string, KillLog>;
+    fetchAll(): Promise<Map<string, KillLog>>;
+    updateCache(rawCommands: RawKillLog[]): Map<string, KillLog>;
+}
+
+// @public
+export class ModCall extends Base {
+    constructor(client: Client, data: RawModCall);
+    caller: Player;
+    callerId: number;
+    callerUsername: string;
+    moderator?: Player;
+    moderatorId?: number;
+    moderatorUsername?: string;
+    _patch(data: RawModCall): this;
+    timestamp: number;
+    toJSON(): RawModCall;
+}
+
+// @public
+export class ModCallManager {
+    constructor(client: Client);
+    cache: Map<string, ModCall>;
+    fetchAll(): Promise<Map<string, ModCall>>;
+    updateCache(rawCommands: RawModCall[]): Map<string, ModCall>;
+}
+
+// @public
+export class Player extends Base {
+    constructor(client: Client, data: RawPlayerData);
+    callsign?: string;
+    id: number;
+    kick(reason?: string): Promise<void>;
+    kill(): Promise<void>;
+    location: {
+        x: number;
+        y: number;
+        postalCode: string;
+        streetName: string;
+        buildingNumber: string;
+    };
+    message(text: string): Promise<void>;
+    _patch(data: RawPlayerData): this;
+    permission: 'Normal' | 'Server Administrator' | 'Server Owner' | 'Server Moderator';
+    team: string;
+    toJSON(): RawPlayerData;
+    username: string;
+    wantedLevel: number;
+}
+
+// @public
+export class PlayerManager {
+    constructor(client: Client);
+    cache: Map<number, Player>;
+    fetchAll(): Promise<Map<number, Player>>;
+    getIdFromName(name: string): number | undefined;
+    updateCache(rawPlayers: RawPlayerData[]): Map<number, Player>;
+}
+
+// @public
+export interface RawCommandLog {
+    Command: string;
+    Player: string;
+    Timestamp: number;
+}
+
+// @public
+export interface RawEmergencyCall {
+    Caller: number;
+    CallNumber: number;
+    Description: string;
+    Players: number[];
+    Position: number[];
+    PositionDescriptor: string;
+    StartedAt: number;
+    Team: string;
+}
+
+// @public
+export interface RawJoinLog {
+    Join: boolean;
+    Player: string;
+    Timestamp: number;
+}
+
+// @public
+export interface RawKillLog {
+    Killed: string;
+    Killer: string;
+    Timestamp: number;
+}
+
+// @public
+export interface RawModCall {
+    Caller: string;
+    Moderator?: string;
+    Timestamp: number;
+}
+
+// @public
+export interface RawPlayerData {
+    Callsign: string;
+    Location: {
+        LocationX: number;
+        LocationY: number;
+        PostalCode: string;
+        StreetName: string;
+        BuildingNumber: string;
+    };
+    Permission: 'Normal' | 'Server Administrator' | 'Server Owner' | 'Server Moderator';
+    Player: string;
+    Team: string;
+    WantedStars: number;
+}
+
+// @public
+export interface RawServerData {
+    AccVerifiedReq: 'Disabled' | 'Email' | 'Phone/ID';
+    CommandLogs?: RawCommandLog[];
+    CoOwnerIds: number[];
+    CurrentPlayers: number;
+    EmergencyCalls?: RawEmergencyCall[];
+    JoinKey: string;
+    JoinLogs?: RawJoinLog[];
+    KillLogs?: RawKillLog[];
+    MaxPlayers: number;
+    ModCalls?: RawModCall[];
+    Name: string;
+    OwnerId: number;
+    Players?: RawPlayerData[];
+    Queue?: number[];
+    Staff?: RawStaffData[];
+    TeamBalance: boolean;
+    Vehicles?: RawVehicle[];
+}
+
+// @public
+export interface RawStaffData {
+    Admins: Record<string, string>;
+    Helpers: Record<string, string>;
+    Mods: Record<string, string>;
+}
+
+// @public
+export interface RawVehicle {
+    ColorHex: string;
+    ColorName: string;
+    Name: string;
+    Owner: string;
+    Plate: string;
+    Texture?: string;
+}
+
+// @public
+export class RestManager {
+    constructor(options: ClientOptions);
+    request(method: 'GET' | 'POST', endpoint: string, body?: any): Promise<any>;
+}
+
+// @public
+export class Server extends Base {
+    constructor(client: Client, data: RawServerData);
+    accVerifiedReq: 'Disabled' | 'Email' | 'Phone/ID';
+    compare(data: RawServerData): boolean;
+    coOwnerIds: number[];
+    currentPlayers: number;
+    joinKey: string;
+    maxPlayers: number;
+    name: string;
+    ownerId: number;
+    _patch(data: RawServerData): this;
+    queue: number[];
+    teamBalance: boolean;
+    toJSON(): RawServerData;
+}
+
+// @public
+export class ServerManager {
+    constructor(client: Client);
+    cache?: Server;
+    fetch(): Promise<RawServerData>;
+}
+
+// @public
+export class Vehicle extends Base {
+    constructor(client: Client, data: RawVehicle);
+    colorHex: string;
+    colorName: string;
+    name: string;
+    owner: Player;
+    ownerId: number;
+    ownerUsername: string;
+    _patch(data: RawVehicle): this;
+    plate: string;
+    texture?: string;
+    toJSON(): RawVehicle;
+}
+
+// @public
+export class VehicleManager {
+    constructor(client: Client);
+    cache: Map<string, Vehicle>;
+    fetchAll(): Promise<Map<string, Vehicle>>;
+    updateCache(rawVehicles: RawVehicle[]): Map<string, Vehicle>;
+}
+
+// @alpha
+export class WebhookServer {
+    constructor(client: Client);
+    listen(): void;
+}
+
 // (No @packageDocumentation comment for this package)
 
 ```

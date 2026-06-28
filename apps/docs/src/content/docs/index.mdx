@@ -1,9 +1,9 @@
 ---
 title: ERLCApi
-description: Description
+description: "A modern, typed, high-performance API wrapper for Roblox Emergency Response: Liberty County private servers."
 template: splash
 hero:
-  tagline: Tagline
+  tagline: Integrate, monitor, and manage your Roblox ER:LC private server with a fully-featured TypeScript SDK.
   image:
     file: ../../assets/houston.webp
   actions:
@@ -19,19 +19,19 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Why ERLCApi?
+## Why Choose ERLCApi?
 
 <CardGrid stagger>
-    <Card title="Card1" icon="rocket">
-        Card Desc
+    <Card title="TypeScript Native" icon="seti:typescript">
+        Built from the ground up in TS, providing robust types, autocompletion, and compile-time checks for all raw payloads.
     </Card>
-    <Card title="Card2" icon="forward">
-        Card Desc
+    <Card title="Automatic Rate Limiting" icon="rocket">
+        Queues API requests automatically and respects ER:LC's rate limit reset headers to prevent 429 errors.
     </Card>
-    <Card title="Card3" icon="seti:javascript">
-        Card Desc
+    <Card title="Real-time Event System" icon="forward">
+        Subscribe to server updates, player joins/leaves, vehicle spawns, mod calls, and kill logs using polling or webhooks.
     </Card>
-    <Card title="Card4" icon="code">
-        Card Desc
+    <Card title="Developer-Friendly API" icon="code">
+        Interact with players and vehicles using intuitive object-oriented methods like `player.kick()` and `player.message()`.
     </Card>
 </CardGrid>

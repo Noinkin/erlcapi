@@ -1,0 +1,50 @@
+---
+title: Server & Command Management
+description: Learn how to query server stats and execute custom commands directly from your script.
+---
+
+ERLCApi allows you to inspect server state and execute custom administrative console commands.
+
+## Fetching Server Details
+
+The `client.server` manager handles general server statistics.
+
+```javascript
+// Fetch general server details
+const serverDetails = await client.server.fetch();
+
+console.log(`Server Name: ${serverDetails.Name}`);
+console.log(`Players Online: ${serverDetails.CurrentPlayers}/${serverDetails.MaxPlayers}`);
+console.log(`Join Key: ${serverDetails.JoinKey}`);
+console.log(`Acc Verified Req: ${serverDetails.AccVerifiedReq}`);
+```
+
+The server manager maintains a cache of the server details under `client.server.cache`.
+
+---
+
+## Executing Administrative Commands
+
+You can execute raw admin console commands through the `client.commands` manager. The system rate limits and enqueues these commands automatically.
+
+```javascript
+// Execute custom command
+const response = await client.commands.execute(':heal jamie');
+console.log(`Command response status: ${response}`);
+```
+
+### Common Commands
+
+You can run any console command supported by ER:LC private servers, such as:
+*   `:heal <username>`
+*   `:kick <username> <reason>`
+*   `:kill <username>`
+*   `:pm <username> <message>`
+*   `:ban <username> <reason>`
+*   `:m <message>`
+*   `:h <message>`
+
+```javascript
+// Send a server-wide announcement
+await client.commands.execute(':servermessage Maintenance starting in 5 minutes!');
+```

@@ -2,20 +2,66 @@ import { Base } from './base.js';
 import { Client } from '../client/client.js';
 import { type RawPlayerData } from '../types/index.js';
 
+/**
+ * Represents a player in the ER:LC server.
+ * @public
+ */
 export class Player extends Base {
+    /**
+     * The unique UserId of the player.
+     */
     public id!: number;
+    /**
+     * The Roblox username of the player.
+     */
     public username!: string;
+    /**
+     * The in-game team name the player is currently on.
+     */
     public team!: string;
+    /**
+     * The player's callsign, if assigned.
+     */
     public callsign?: string;
-    public location!: { x: number, y: number, postalCode: string, streetName: string, buildingNumber: string };
+    /**
+     * The current location coordinates and address of the player.
+     */
+    public location!: { 
+        /** The X coordinate in-game. */
+        x: number; 
+        /** The Y coordinate in-game. */
+        y: number; 
+        /** The postal code of the street. */
+        postalCode: string; 
+        /** The name of the street. */
+        streetName: string; 
+        /** The building number. */
+        buildingNumber: string; 
+    };
+    /**
+     * The player's server permission role.
+     */
     public permission!: 'Normal' | 'Server Administrator' | 'Server Owner' | 'Server Moderator';
+    /**
+     * The player's current wanted star level.
+     */
     public wantedLevel!: number;
 
+    /**
+     * Creates an instance of Player.
+     * @param client - The ERLCApi client.
+     * @param data - The raw player data to initialize.
+     */
     constructor(client: Client, data: RawPlayerData) {
         super(client);
         this._patch(data);
     }
 
+    /**
+     * Patches/updates the player structure with new raw data.
+     * @param data - The new raw player data.
+     * @returns This player instance.
+     */
     public _patch(data: RawPlayerData): this {
         const splitPlayer = data.Player.split(':');
         this.id = Number(splitPlayer[1]);
@@ -34,18 +80,128 @@ export class Player extends Base {
         return this;
     }
 
+    /**
+     * Kicks the player from the game server.
+     * @param reason - The reason for kicking the player. Defaults to "Kicked by API".
+     * @returns A promise that resolves when the kick command is sent.
+     */
     public async kick(reason: string = "Kicked by API"): Promise<void> {
         await this.client.commands.execute(`:kick ${this.username} ${reason}`);
     }
 
+    /**
+     * Bans the player from the game server.
+     * @param reason - The reason for banning the player. Defaults to "Banned by API".
+     * @returns A promise that resolves when the ban command is sent.
+     */
+    public async ban(reason: string = "Banned by API"): Promise<void> {
+        await this.client.commands.execute(`:ban ${this.username} ${reason}`);
+    }
+
+    /**
+     * Jails the player in the game server.
+     * @returns A promise that resolves when the jail command is sent.
+     */
+    public async jail(): Promise<void> {
+        await this.client.commands.execute(`:jail ${this.username}`);
+    }
+
+    /**
+     * Heals the player in the game server.
+     * @returns A promise that resolves when the heal command is sent.
+     */
+    public async heal(): Promise<void> {
+        await this.client.commands.execute(`:heal ${this.username}`);
+    }
+
+    /**
+     * Kills the player in-game.
+     * @returns A promise that resolves when the kill command is sent.
+     */
     public async kill(): Promise<void> {
         await this.client.commands.execute(`:kill ${this.username}`);
     }
 
+    /**
+     * Helpers the player in-game.
+     * @returns A promise that resolves when the helper command is sent.
+     */
+    public async helper(): Promise<void> {
+        await this.client.commands.execute(`:helper ${this.username}`);
+    }
+
+    /**
+     * Unhelpers the player in-game.
+     * @returns A promise that resolves when the unhelper command is sent.
+     */
+    public async unhelper(): Promise<void> {
+        await this.client.commands.execute(`:helper ${this.username}`);
+    }
+
+    /**
+     * Mods the player in-game.
+     * @returns A promise that resolves when the mod command is sent.
+     */
+    public async mod(): Promise<void> {
+        await this.client.commands.execute(`:mod ${this.username}`);
+    }
+
+    /**
+     * Unmods the player in-game.
+     * @returns A promise that resolves when the unmod command is sent.
+     */
+    public async unmod(): Promise<void> {
+        await this.client.commands.execute(`:unmod ${this.username}`);
+    }
+
+    /**
+     * Admins the player in-game.
+     * @returns A promise that resolves when the admin command is sent.
+     */
+    public async admin(): Promise<void> {
+        await this.client.commands.execute(`:admin ${this.username}`);
+    }
+
+    /**
+     * Unadmins the player in-game.
+     * @returns A promise that resolves when the unadmin command is sent.
+     */
+    public async unadmin(): Promise<void> {
+        await this.client.commands.execute(`:unadmin ${this.username}`);
+    }
+
+    /**
+     * Teleports the player to another player.
+     * @param player - The player to teleport the player to.
+     * @returns A promise that resolves when the teleport command is sent.
+     */
+    public async tp(player: Player | number): Promise<void> {
+        const playerId = player instanceof Player ? player.id : player;
+        await this.client.commands.execute(`:tp ${this.username} ${playerId}`);
+    }
+
+    /**
+     * Sends a private message to the player.
+     * @param text - The message body.
+     * @returns A promise that resolves when the message command is sent.
+     */
     public async message(text: string): Promise<void> {
         await this.client.commands.execute(`:pm ${this.username} ${text}`);
     }
 
+    /**
+     * Sends a private message to the player.
+     * @param text - The message body.
+     * @returns A promise that resolves when the message command is sent.
+     */
+    public async pm(text: string): Promise<void> {
+        await this.client.commands.execute(`:pm ${this.username} ${text}`);
+    }
+
+    /**
+     * Converts this Player instance back into raw data structure.
+     * @returns The raw player data.
+     */
     public toJSON(): RawPlayerData {
         return {
             Player: `${this.username}:${this.id}`,

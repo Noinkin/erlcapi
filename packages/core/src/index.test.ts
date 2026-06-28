@@ -14,3 +14,7 @@ client.on(ERLCEvents.vehicleAdd, (vehicle) => {
         }, 10000)
     }
 })
+
+client.on(ERLCEvents.playerJoin, (player) => {
+    console.log(player)
+})
