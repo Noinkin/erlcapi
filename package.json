@@ -1,7 +1,7 @@
 {
-  "name": "erlcapi",
+  "name": "erlcjs",
   "private": true,
-  "homepage": "noinkin.github.io/erlcapi",
+  "homepage": "erlcjs.xyz",
   "scripts": {
     "build": "pnpm dlx turbo run build --filter=!apps-docs",
     "lint": "pnpm dlx turbo run lint",

@@ -10,8 +10,8 @@ const apiSidebarItems = fs.existsSync(sidebarFilePath)
   : [];
 
 export default defineConfig({
-    site: 'https://noinkin.github.io',
-    base: '/erlcapi',
+    site: 'https://erlcjs.xyz',
+    base: '/',
 	integrations: [
 		starlight({
 			title: 'ERLCjs',

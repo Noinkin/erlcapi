@@ -33,7 +33,7 @@ for (const file of rawApiFiles) {
     return part.toLowerCase()
 });
 
-  const relativeAstroUrl = `/erlcapi/api/${pathParts.join('/')}/`;
+  const relativeAstroUrl = `/api/${pathParts.join('/')}/`;
   
   fileToUrlMap.set(baseName, { 
     oldFullPath: fullPath, 
@@ -60,7 +60,7 @@ for (const [baseName, meta] of fileToUrlMap.entries()) {
     const cleanKey = decodeURIComponent(capturedFilename);
     
     if (cleanKey === 'index') {
-      return '](/erlcapi/api/)';
+      return '](/api/)';
     }
     
     if (fileToUrlMap.has(cleanKey)) {
@@ -140,7 +140,7 @@ if (fs.existsSync(indexFile)) {
     const cleanKey = decodeURIComponent(capturedFilename);
     
     if (cleanKey === 'index') {
-      return '](/erlcapi/api/)';
+      return '](/api/)';
     }
     
     if (fileToUrlMap.has(cleanKey)) {
