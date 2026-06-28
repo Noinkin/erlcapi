@@ -1,4 +1,5 @@
 import { type ClientOptions } from "../types/index.js";
+import { InvalidServerKeyError } from "../errors/index.js";
 
 export class RestManager {
     private queue: Array<() => Promise<any>> = [];
@@ -31,6 +32,10 @@ export class RestManager {
                     const resetHeader = response.headers.get('x-ratelimit-reset');
                     if (resetHeader) {
                         this.rateLimitReset = Date.now() + (parseInt(resetHeader) * 1000);
+                    }
+
+                    if (response.status === 403) {
+                        throw new InvalidServerKeyError();
                     }
 
                     if (response.status === 429) {

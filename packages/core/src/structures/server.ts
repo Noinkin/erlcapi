@@ -7,6 +7,7 @@ export class Server extends Base {
     ownerId!: number;
     coOwnerIds!: number[];
     currentPlayers!: number;
+    maxPlayers!: number;
     joinKey!: string;
     accVerifiedReq!: 'Disabled' | 'Email' | 'Phone/ID';
     teamBalance!: boolean;
@@ -21,6 +22,7 @@ export class Server extends Base {
         this.ownerId = data.OwnerId;
         this.coOwnerIds = data.CoOwnerIds;
         this.currentPlayers = data.CurrentPlayers;
+        this.maxPlayers = data.MaxPlayers;
         this.joinKey = data.JoinKey;
         this.accVerifiedReq = data.AccVerifiedReq;
         this.teamBalance = data.TeamBalance;

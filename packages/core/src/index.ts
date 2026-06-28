@@ -22,3 +22,6 @@ export * from './structures/vehicle.js';
 
 // Types
 export * from './types/index.js';
+
+// Errors
+export * from './errors/index.js';
