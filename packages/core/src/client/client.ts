@@ -1,12 +1,19 @@
 import { EventEmitter } from 'node:events';
 import { type ClientOptions } from '../types/index.js';
 import { RestManager } from '../rest/manager.js';
+import { ServerManager } from '../managers/servermanager.js';
 import { PlayerManager } from '../managers/playermanager.js';
 import { CommandManager } from '../managers/commandmanager.js';
 import { WebhookServer } from '../gateway/webhookserver.js';
 
+export enum ERLCEvents {
+    playerJoin = 'PLAYER_JOIN',
+    playerLeave = 'PLAYER_LEAVE'
+}
+
 export class Client extends EventEmitter {
     public rest: RestManager;
+    public server: ServerManager;
     public players: PlayerManager;
     public commands: CommandManager;
     private readonly gateway?: WebhookServer;
@@ -14,6 +21,7 @@ export class Client extends EventEmitter {
     constructor(public options: ClientOptions) {
         super();
         this.rest = new RestManager(options);
+        this.server = new ServerManager(this);
         this.players = new PlayerManager(this);
         this.commands = new CommandManager(this);
 
@@ -31,13 +39,14 @@ export class Client extends EventEmitter {
         setInterval(async () => {
             try {
                 const oldIds = new Set(this.players.cache.keys());
-                await this.players.fetchAll();
+                const server = await this.server.fetch();
+                if (server.Players) this.players.updateCache(server.Players);
                 
                 for (const [id, player] of this.players.cache) {
-                    if (!oldIds.has(id)) this.emit('playerJoin', player);
+                    if (!oldIds.has(id)) this.emit(ERLCEvents.playerJoin, player);
                 }
                 for (const id of oldIds) {
-                    if (!this.players.cache.has(id)) this.emit('playerLeave', id);
+                    if (!this.players.cache.has(id)) this.emit(ERLCEvents.playerLeave, id);
                 }
             } catch (err) {
                 this.emit('error', err);
