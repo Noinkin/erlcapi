@@ -17,6 +17,8 @@ import { CommandLog } from '../structures/commandlog.js';
 import { ModCall } from '../structures/modcall.js';
 import { EmergencyCall } from '../structures/emergencycall.js';
 import type { KillLog } from '../structures/killlog.js';
+import type { Staff } from '../structures/staff.js';
+import { StaffManager } from '../managers/staffmanager.js';
 
 /**
  * Event names emitted by the ERLCApi Client.
@@ -53,6 +55,10 @@ export enum ERLCEvents {
     emergencyCallRemove = 'EMERGENCY_CALL_REMOVE',
     /** Emitted when an emergency call is updated. */
     emergencyCallUpdate = 'EMERGENCY_CALL_UPDATE',
+    /** Emitted when a staff member is added */
+    staffAdd = 'STAFF_ADD',
+    /** Emitted when a staff member is removed */
+    staffRemove = 'STAFF_REMOVE'
 }
 
 /**
@@ -94,6 +100,9 @@ export interface ClientEvents {
     [ERLCEvents.emergencyCallRemove]: [call: EmergencyCall];
     /** Emitted when an emergency call is updated. */
     [ERLCEvents.emergencyCallUpdate]: [oldCall: EmergencyCall | null, newCall: EmergencyCall];
+
+    [ERLCEvents.staffAdd]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
+    [ERLCEvents.staffRemove]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
     
     /** Emitted when an error is caught during polling or gateway operations. */
     error: [error: unknown];
@@ -122,6 +131,8 @@ export class Client extends EventEmitter<ClientEvents> {
     public killLogs: KillLogManager;
     /** Manager for moderator call logs. */
     public modCalls: ModCallManager;
+    /** Manager for staff members. */
+    public staff: StaffManager;
     /** Webhook Gateway server instance, if enabled. */
     private readonly gateway?: WebhookServer;
 
@@ -140,6 +151,7 @@ export class Client extends EventEmitter<ClientEvents> {
         this.emergencyCalls = new EmergencyCallManager(this);
         this.killLogs = new KillLogManager(this);
         this.modCalls = new ModCallManager(this);
+        this.staff = new StaffManager(this);
 
         if (options.webhook?.enabled) {
             this.gateway = new WebhookServer(this);
@@ -165,6 +177,7 @@ export class Client extends EventEmitter<ClientEvents> {
                 if (server.EmergencyCalls) this.emergencyCalls.updateCache(server.EmergencyCalls);
                 if (server.KillLogs) this.killLogs.updateCache(server.KillLogs);
                 if (server.ModCalls) this.modCalls.updateCache(server.ModCalls);
+                if (server.Staff) this.staff.updateCache(server.Staff);
             } catch (err) {
                 this.emit('error', err);
             }

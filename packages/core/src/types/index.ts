@@ -299,7 +299,7 @@ export interface RawServerData {
     /**
      * Server staff lists.
      */
-    Staff?: RawStaffData[];
+    Staff?: RawStaffData;
     /**
      * Server join/leave logs.
      */
@@ -328,4 +328,4 @@ export interface RawServerData {
      * Active vehicles spawned.
      */
     Vehicles?: RawVehicle[];
-}
+}

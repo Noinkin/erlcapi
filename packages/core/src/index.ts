@@ -16,6 +16,7 @@ export * from './managers/commandlogmanager.js';
 export * from './managers/emergencycallmanager.js';
 export * from './managers/killlogmanager.js';
 export * from './managers/modcallmanager.js';
+export * from './managers/staffmanager.js';
 
 // Structures
 export * from './structures/base.js';
@@ -26,6 +27,7 @@ export * from './structures/commandlog.js';
 export * from './structures/emergencycall.js';
 export * from './structures/killlog.js';
 export * from './structures/modcall.js';
+export * from './structures/staff.js';
 
 // Types
 export * from './types/index.js';
