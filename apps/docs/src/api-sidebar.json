@@ -123,6 +123,14 @@
         "slug": "api/core/servermanager"
       },
       {
+        "label": "Staff",
+        "slug": "api/core/staff"
+      },
+      {
+        "label": "StaffManager",
+        "slug": "api/core/staffmanager"
+      },
+      {
         "label": "Vehicle",
         "slug": "api/core/vehicle"
       },

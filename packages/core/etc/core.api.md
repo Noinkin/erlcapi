@@ -26,6 +26,7 @@ export class Client extends EventEmitter<ClientEvents> {
     players: PlayerManager;
     rest: RestManager;
     server: ServerManager;
+    staff: StaffManager;
     vehicles: VehicleManager;
 }
 
@@ -44,6 +45,10 @@ export interface ClientEvents {
     [ERLCEvents.poll]: [server: RawServerData];
     [ERLCEvents.serverCreate]: [server: Server];
     [ERLCEvents.serverUpdate]: [oldServer: Server | null, newServer: Server];
+    // (undocumented)
+    [ERLCEvents.staffAdd]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
+    // (undocumented)
+    [ERLCEvents.staffRemove]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
     [ERLCEvents.vehicleAdd]: [vehicle: Vehicle];
     [ERLCEvents.vehicleRemove]: [vehicle: Vehicle];
     [ERLCEvents.vehicleUpdate]: [oldVehicle: Vehicle | null, newVehicle: Vehicle];
@@ -127,6 +132,8 @@ export enum ERLCEvents {
     poll = "POLL",
     serverCreate = "SERVER_CREATE",
     serverUpdate = "SERVER_UPDATE",
+    staffAdd = "STAFF_ADD",
+    staffRemove = "STAFF_REMOVE",
     vehicleAdd = "VEHICLE_ADD",
     vehicleRemove = "VEHICLE_REMOVE",
     vehicleUpdate = "VEHICLE_UPDATE"
@@ -184,8 +191,13 @@ export class ModCallManager {
 // @public
 export class Player extends Base {
     constructor(client: Client, data: RawPlayerData);
+    admin(): Promise<void>;
+    ban(reason?: string): Promise<void>;
     callsign?: string;
+    heal(): Promise<void>;
+    helper(): Promise<void>;
     id: number;
+    jail(): Promise<void>;
     kick(reason?: string): Promise<void>;
     kill(): Promise<void>;
     location: {
@@ -196,10 +208,16 @@ export class Player extends Base {
         buildingNumber: string;
     };
     message(text: string): Promise<void>;
+    mod(): Promise<void>;
     _patch(data: RawPlayerData): this;
     permission: 'Normal' | 'Server Administrator' | 'Server Owner' | 'Server Moderator';
+    pm(text: string): Promise<void>;
     team: string;
     toJSON(): RawPlayerData;
+    tp(player: Player | number): Promise<void>;
+    unadmin(): Promise<void>;
+    unhelper(): Promise<void>;
+    unmod(): Promise<void>;
     username: string;
     wantedLevel: number;
 }
@@ -285,7 +303,7 @@ export interface RawServerData {
     OwnerId: number;
     Players?: RawPlayerData[];
     Queue?: number[];
-    Staff?: RawStaffData[];
+    Staff?: RawStaffData;
     TeamBalance: boolean;
     Vehicles?: RawVehicle[];
 }
@@ -335,6 +353,26 @@ export class ServerManager {
     constructor(client: Client);
     cache?: Server;
     fetch(): Promise<RawServerData>;
+}
+
+// @public
+export class Staff extends Base {
+    constructor(client: Client, userId: string, username: string);
+    id: number;
+    online: boolean;
+    _patch(userId: string, username: string): this;
+    player?: Player;
+    username: string;
+}
+
+// @public
+export class StaffManager {
+    constructor(client: Client);
+    admins: Map<number, Staff>;
+    fetchAll(): Promise<Map<string, Map<number, Staff>>>;
+    helpers: Map<number, Staff>;
+    mods: Map<number, Staff>;
+    updateCache(rawStaff: RawStaffData): Map<string, Map<number, Staff>>;
 }
 
 // @public

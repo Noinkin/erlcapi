@@ -1,7 +1,7 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.58.7",
+    "toolVersion": "7.58.9",
     "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
@@ -195,10 +195,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class Base "
+              "text": "declare class Base "
             }
           ],
-          "fileUrlPath": "src/structures/base.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "Base",
@@ -278,7 +278,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class Client extends "
+              "text": "declare class Client extends "
             },
             {
               "kind": "Reference",
@@ -303,7 +303,7 @@
               "text": " "
             }
           ],
-          "fileUrlPath": "src/client/client.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "Client",
@@ -623,6 +623,37 @@
             },
             {
               "kind": "Property",
+              "canonicalReference": "@erlcjs/core!Client#staff:member",
+              "docComment": "/**\n * Manager for staff members.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "staff: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "StaffManager",
+                  "canonicalReference": "@erlcjs/core!StaffManager:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "staff",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
               "canonicalReference": "@erlcjs/core!Client#vehicles:member",
               "docComment": "/**\n * Manager for spawned vehicles cache and events.\n */\n",
               "excerptTokens": [
@@ -666,10 +697,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface ClientEvents "
+              "text": "interface ClientEvents "
             }
           ],
-          "fileUrlPath": "src/client/client.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "name": "ClientEvents",
           "preserveMemberOrder": false,
@@ -1270,6 +1301,96 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!ClientEvents#STAFF_ADD:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ERLCEvents.staffAdd",
+                  "canonicalReference": "@erlcjs/core!ERLCEvents.staffAdd:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "[staff: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Staff",
+                  "canonicalReference": "@erlcjs/core!Staff:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", type: 'Admin' | 'Mod' | 'Helper']"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "STAFF_ADD",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "@erlcjs/core!ClientEvents#STAFF_REMOVE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "["
+                },
+                {
+                  "kind": "Reference",
+                  "text": "ERLCEvents.staffRemove",
+                  "canonicalReference": "@erlcjs/core!ERLCEvents.staffRemove:member"
+                },
+                {
+                  "kind": "Content",
+                  "text": "]: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "[staff: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Staff",
+                  "canonicalReference": "@erlcjs/core!Staff:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", type: 'Admin' | 'Mod' | 'Helper']"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "STAFF_REMOVE",
+              "propertyTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 6
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "@erlcjs/core!ClientEvents#VEHICLE_ADD:member",
               "docComment": "/**\n * Emitted when a vehicle is spawned.\n */\n",
               "excerptTokens": [
@@ -1422,10 +1543,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface ClientOptions "
+              "text": "interface ClientOptions "
             }
           ],
-          "fileUrlPath": "src/types/index.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "name": "ClientOptions",
           "preserveMemberOrder": false,
@@ -1548,7 +1669,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class CommandLog extends "
+              "text": "declare class CommandLog extends "
             },
             {
               "kind": "Reference",
@@ -1560,7 +1681,7 @@
               "text": " "
             }
           ],
-          "fileUrlPath": "src/structures/commandlog.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "CommandLog",
@@ -1862,10 +1983,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class CommandLogManager "
+              "text": "declare class CommandLogManager "
             }
           ],
-          "fileUrlPath": "src/managers/commandlogmanager.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "CommandLogManager",
@@ -2079,10 +2200,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class CommandManager "
+              "text": "declare class CommandManager "
             }
           ],
-          "fileUrlPath": "src/managers/commandmanager.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "CommandManager",
@@ -2184,7 +2305,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class EmergencyCall extends "
+              "text": "declare class EmergencyCall extends "
             },
             {
               "kind": "Reference",
@@ -2196,7 +2317,7 @@
               "text": " "
             }
           ],
-          "fileUrlPath": "src/structures/emergencycall.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "EmergencyCall",
@@ -2653,10 +2774,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class EmergencyCallManager "
+              "text": "declare class EmergencyCallManager "
             }
           ],
-          "fileUrlPath": "src/managers/emergencycallmanager.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "EmergencyCallManager",
@@ -2870,10 +2991,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare enum ERLCEvents "
+              "text": "declare enum ERLCEvents "
             }
           ],
-          "fileUrlPath": "src/client/client.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "name": "ERLCEvents",
           "preserveMemberOrder": false,
@@ -3132,6 +3253,48 @@
             },
             {
               "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!ERLCEvents.staffAdd:member",
+              "docComment": "/**\n * Emitted when a staff member is added\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "staffAdd = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"STAFF_ADD\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "staffAdd"
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "@erlcjs/core!ERLCEvents.staffRemove:member",
+              "docComment": "/**\n * Emitted when a staff member is removed\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "staffRemove = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "\"STAFF_REMOVE\""
+                }
+              ],
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "name": "staffRemove"
+            },
+            {
+              "kind": "EnumMember",
               "canonicalReference": "@erlcjs/core!ERLCEvents.vehicleAdd:member",
               "docComment": "/**\n * Emitted when a vehicle is spawned.\n */\n",
               "excerptTokens": [
@@ -3202,7 +3365,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class InvalidServerKeyError extends "
+              "text": "declare class InvalidServerKeyError extends "
             },
             {
               "kind": "Reference",
@@ -3214,7 +3377,7 @@
               "text": " "
             }
           ],
-          "fileUrlPath": "src/errors/index.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "InvalidServerKeyError",
@@ -3266,7 +3429,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class KillLog extends "
+              "text": "declare class KillLog extends "
             },
             {
               "kind": "Reference",
@@ -3278,7 +3441,7 @@
               "text": " "
             }
           ],
-          "fileUrlPath": "src/structures/killlog.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "KillLog",
@@ -3641,10 +3804,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class KillLogManager "
+              "text": "declare class KillLogManager "
             }
           ],
-          "fileUrlPath": "src/managers/killlogmanager.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "KillLogManager",
@@ -3858,7 +4021,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class ModCall extends "
+              "text": "declare class ModCall extends "
             },
             {
               "kind": "Reference",
@@ -3870,7 +4033,7 @@
               "text": " "
             }
           ],
-          "fileUrlPath": "src/structures/modcall.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "ModCall",
@@ -4233,10 +4396,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class ModCallManager "
+              "text": "declare class ModCallManager "
             }
           ],
-          "fileUrlPath": "src/managers/modcallmanager.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "ModCallManager",
@@ -4450,7 +4613,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class Player extends "
+              "text": "declare class Player extends "
             },
             {
               "kind": "Reference",
@@ -4462,7 +4625,7 @@
               "text": " "
             }
           ],
-          "fileUrlPath": "src/structures/player.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "Player",
@@ -4568,6 +4731,95 @@
               ]
             },
             {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#admin:member(1)",
+              "docComment": "/**\n * Admins the player in-game.\n *\n * @returns A promise that resolves when the admin command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "admin(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "admin"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#ban:member(1)",
+              "docComment": "/**\n * Bans the player from the game server.\n *\n * @param reason - The reason for banning the player. Defaults to \"Banned by API\".\n *\n * @returns A promise that resolves when the ban command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "ban(reason?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "reason",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": true
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "ban"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!Player#callsign:member",
               "docComment": "/**\n * The player's callsign, if assigned.\n */\n",
@@ -4598,6 +4850,78 @@
               "isAbstract": false
             },
             {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#heal:member(1)",
+              "docComment": "/**\n * Heals the player in the game server.\n *\n * @returns A promise that resolves when the heal command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "heal(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "heal"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#helper:member(1)",
+              "docComment": "/**\n * Helpers the player in-game.\n *\n * @returns A promise that resolves when the helper command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "helper(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "helper"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!Player#id:member",
               "docComment": "/**\n * The unique UserId of the player.\n */\n",
@@ -4626,6 +4950,42 @@
               "isStatic": false,
               "isProtected": false,
               "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#jail:member(1)",
+              "docComment": "/**\n * Jails the player in the game server.\n *\n * @returns A promise that resolves when the jail command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "jail(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "jail"
             },
             {
               "kind": "Method",
@@ -4800,6 +5160,42 @@
               "name": "message"
             },
             {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#mod:member(1)",
+              "docComment": "/**\n * Mods the player in-game.\n *\n * @returns A promise that resolves when the mod command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "mod(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "mod"
+            },
+            {
               "kind": "Property",
               "canonicalReference": "@erlcjs/core!Player#permission:member",
               "docComment": "/**\n * The player's server permission role.\n */\n",
@@ -4828,6 +5224,59 @@
               "isStatic": false,
               "isProtected": false,
               "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#pm:member(1)",
+              "docComment": "/**\n * Sends a private message to the player.\n *\n * @param text - The message body.\n *\n * @returns A promise that resolves when the message command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "pm(text: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "text",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "pm"
             },
             {
               "kind": "Property",
@@ -4890,6 +5339,172 @@
               "isOptional": false,
               "isAbstract": false,
               "name": "toJSON"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#tp:member(1)",
+              "docComment": "/**\n * Teleports the player to another player.\n *\n * @param player - The player to teleport the player to.\n *\n * @returns A promise that resolves when the teleport command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "tp(player: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Player",
+                  "canonicalReference": "@erlcjs/core!Player:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "player",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "tp"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#unadmin:member(1)",
+              "docComment": "/**\n * Unadmins the player in-game.\n *\n * @returns A promise that resolves when the unadmin command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "unadmin(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "unadmin"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#unhelper:member(1)",
+              "docComment": "/**\n * Unhelpers the player in-game.\n *\n * @returns A promise that resolves when the unhelper command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "unhelper(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "unhelper"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Player#unmod:member(1)",
+              "docComment": "/**\n * Unmods the player in-game.\n *\n * @returns A promise that resolves when the unmod command is sent.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "unmod(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "unmod"
             },
             {
               "kind": "Property",
@@ -4965,10 +5580,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class PlayerManager "
+              "text": "declare class PlayerManager "
             }
           ],
-          "fileUrlPath": "src/managers/playermanager.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "PlayerManager",
@@ -5230,10 +5845,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface RawCommandLog "
+              "text": "interface RawCommandLog "
             }
           ],
-          "fileUrlPath": "src/types/index.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "name": "RawCommandLog",
           "preserveMemberOrder": false,
@@ -5329,10 +5944,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface RawEmergencyCall "
+              "text": "interface RawEmergencyCall "
             }
           ],
-          "fileUrlPath": "src/types/index.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "name": "RawEmergencyCall",
           "preserveMemberOrder": false,
@@ -5563,10 +6178,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface RawJoinLog "
+              "text": "interface RawJoinLog "
             }
           ],
-          "fileUrlPath": "src/types/index.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "name": "RawJoinLog",
           "preserveMemberOrder": false,
@@ -5662,10 +6277,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface RawKillLog "
+              "text": "interface RawKillLog "
             }
           ],
-          "fileUrlPath": "src/types/index.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "name": "RawKillLog",
           "preserveMemberOrder": false,
@@ -5761,10 +6376,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface RawModCall "
+              "text": "interface RawModCall "
             }
           ],
-          "fileUrlPath": "src/types/index.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "name": "RawModCall",
           "preserveMemberOrder": false,
@@ -5860,10 +6475,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface RawPlayerData "
+              "text": "interface RawPlayerData "
             }
           ],
-          "fileUrlPath": "src/types/index.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "name": "RawPlayerData",
           "preserveMemberOrder": false,
@@ -6040,10 +6655,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface RawServerData "
+              "text": "interface RawServerData "
             }
           ],
-          "fileUrlPath": "src/types/index.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "name": "RawServerData",
           "preserveMemberOrder": false,
@@ -6472,10 +7087,6 @@
                 },
                 {
                   "kind": "Content",
-                  "text": "[]"
-                },
-                {
-                  "kind": "Content",
                   "text": ";"
                 }
               ],
@@ -6485,7 +7096,7 @@
               "name": "Staff",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
-                "endIndex": 3
+                "endIndex": 2
               }
             },
             {
@@ -6557,10 +7168,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface RawStaffData "
+              "text": "interface RawStaffData "
             }
           ],
-          "fileUrlPath": "src/types/index.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "name": "RawStaffData",
           "preserveMemberOrder": false,
@@ -6671,10 +7282,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface RawVehicle "
+              "text": "interface RawVehicle "
             }
           ],
-          "fileUrlPath": "src/types/index.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "name": "RawVehicle",
           "preserveMemberOrder": false,
@@ -6851,10 +7462,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class RestManager "
+              "text": "declare class RestManager "
             }
           ],
-          "fileUrlPath": "src/rest/manager.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "RestManager",
@@ -6988,7 +7599,7 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class Server extends "
+              "text": "declare class Server extends "
             },
             {
               "kind": "Reference",
@@ -7000,7 +7611,7 @@
               "text": " "
             }
           ],
-          "fileUrlPath": "src/structures/server.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "Server",
@@ -7470,10 +8081,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class ServerManager "
+              "text": "declare class ServerManager "
             }
           ],
-          "fileUrlPath": "src/managers/servermanager.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "ServerManager",
@@ -7593,12 +8204,12 @@
         },
         {
           "kind": "Class",
-          "canonicalReference": "@erlcjs/core!Vehicle:class",
-          "docComment": "/**\n * Represents a spawned vehicle in the ER:LC server.\n *\n * @public\n */\n",
+          "canonicalReference": "@erlcjs/core!Staff:class",
+          "docComment": "/**\n * Represents a staff member.\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class Vehicle extends "
+              "text": "declare class Staff extends "
             },
             {
               "kind": "Reference",
@@ -7610,7 +8221,608 @@
               "text": " "
             }
           ],
-          "fileUrlPath": "src/structures/vehicle.ts",
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "Staff",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!Staff#_patch:member(1)",
+              "docComment": "/**\n * Patches the Staff structure with new raw data.\n *\n * @param userId - The user id.\n *\n * @param username - The username.\n *\n * @returns This staff instance.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "_patch(userId: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", username: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "this"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "userId",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "username",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "_patch"
+            },
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@erlcjs/core!Staff:constructor(1)",
+              "docComment": "/**\n * Creates an instance of Staff.\n *\n * @param client - The ERLCApi client.\n *\n * @param userId - The user id.\n *\n * @param username - The username.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(client: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Client",
+                  "canonicalReference": "@erlcjs/core!Client:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", userId: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", username: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "client",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "userId",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  },
+                  "isOptional": false
+                },
+                {
+                  "parameterName": "username",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 6
+                  },
+                  "isOptional": false
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!Staff#id:member",
+              "docComment": "/**\n * The staff members user id.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "id: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "id",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!Staff#online:member",
+              "docComment": "/**\n * Whether or not the staff member is online.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "online: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "online",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!Staff#player:member",
+              "docComment": "/**\n * The player instance of the staff member if they are online.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "player?: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Player",
+                  "canonicalReference": "@erlcjs/core!Player:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "player",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!Staff#username:member",
+              "docComment": "/**\n * The staff members username.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "username: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "username",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 2
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@erlcjs/core!StaffManager:class",
+          "docComment": "/**\n * Manager responsible for fetching, caching, and updating Vehicle structures.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "declare class StaffManager "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
+          "releaseTag": "Public",
+          "isAbstract": false,
+          "name": "StaffManager",
+          "preserveMemberOrder": false,
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "@erlcjs/core!StaffManager:constructor(1)",
+              "docComment": "/**\n * Creates an instance of StaffManager.\n *\n * @param client - The ERLCApi client.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor(client: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Client",
+                  "canonicalReference": "@erlcjs/core!Client:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "client",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ]
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!StaffManager#admins:member",
+              "docComment": "/**\n * Map cache of admins, keyed by their userId.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "admins: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Map",
+                  "canonicalReference": "!Map:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<number, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Staff",
+                  "canonicalReference": "@erlcjs/core!Staff:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "admins",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!StaffManager#fetchAll:member(1)",
+              "docComment": "/**\n * Fetches all staff members. Updates the staff cache.\n *\n * @returns A promise resolving to a Map of active Vehicles.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fetchAll(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Map",
+                  "canonicalReference": "!Map:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Map",
+                  "canonicalReference": "!Map:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<number, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Staff",
+                  "canonicalReference": "@erlcjs/core!Staff:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">>>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "fetchAll"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!StaffManager#helpers:member",
+              "docComment": "/**\n * Map cache of helpers, keyed by their userId.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "helpers: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Map",
+                  "canonicalReference": "!Map:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<number, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Staff",
+                  "canonicalReference": "@erlcjs/core!Staff:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "helpers",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "@erlcjs/core!StaffManager#mods:member",
+              "docComment": "/**\n * Map cache of mods, keyed by their userId.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "mods: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Map",
+                  "canonicalReference": "!Map:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<number, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Staff",
+                  "canonicalReference": "@erlcjs/core!Staff:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "mods",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "isStatic": false,
+              "isProtected": false,
+              "isAbstract": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "@erlcjs/core!StaffManager#updateCache:member(1)",
+              "docComment": "/**\n * Re-synchronizes the cache with the raw staff list from the API. Emits staffAdd and staffRemove events.\n *\n * @param rawStaff - Raw staff list payload.\n *\n * @returns The updated staff cache Map.\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "updateCache(rawStaff: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "RawStaffData",
+                  "canonicalReference": "@erlcjs/core!RawStaffData:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Map",
+                  "canonicalReference": "!Map:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<string, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Map",
+                  "canonicalReference": "!Map:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<number, "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Staff",
+                  "canonicalReference": "@erlcjs/core!Staff:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "isProtected": false,
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "rawStaff",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  },
+                  "isOptional": false
+                }
+              ],
+              "isOptional": false,
+              "isAbstract": false,
+              "name": "updateCache"
+            }
+          ],
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "@erlcjs/core!Vehicle:class",
+          "docComment": "/**\n * Represents a spawned vehicle in the ER:LC server.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "declare class Vehicle extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "Base",
+              "canonicalReference": "@erlcjs/core!Base:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "Vehicle",
@@ -8002,10 +9214,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class VehicleManager "
+              "text": "declare class VehicleManager "
             }
           ],
-          "fileUrlPath": "src/managers/vehiclemanager.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Public",
           "isAbstract": false,
           "name": "VehicleManager",
@@ -8219,10 +9431,10 @@
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class WebhookServer "
+              "text": "declare class WebhookServer "
             }
           ],
-          "fileUrlPath": "src/gateway/webhookserver.ts",
+          "fileUrlPath": "dist/index.d.ts",
           "releaseTag": "Alpha",
           "isAbstract": false,
           "name": "WebhookServer",
