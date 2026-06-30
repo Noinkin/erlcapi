@@ -3,7 +3,6 @@ import { Client, ERLCEvents } from '../client/client.js';
 
 /**
  * Webhook Server for handling real-time gateway events pushed by ER:LC.
- * @alpha
  */
 export class WebhookServer {
     private readonly server: Server;
