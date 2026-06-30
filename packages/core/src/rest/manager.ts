@@ -31,7 +31,10 @@ export class RestManager {
             this.queue.push(async () => {
                 try {
                     if (Date.now() < this.rateLimitReset) {
-                        const waitTime = this.rateLimitReset - Date.now();
+                        const waitTime = Math.min(
+                            Math.max(0, this.rateLimitReset - Date.now()), 
+                            2147483647
+                        );
                         await new Promise((res) => setTimeout(res, waitTime));
                     }
 
@@ -49,7 +52,7 @@ export class RestManager {
 
                     const resetHeader = response.headers.get('x-ratelimit-reset');
                     if (resetHeader) {
-                        this.rateLimitReset = Date.now() + parseInt(resetHeader) * 1000;
+                        this.rateLimitReset = parseInt(resetHeader) * 1000;
                     }
 
                     if (response.status === 403) {
