@@ -47,7 +47,11 @@ const client = new Client({
 });
 ```
 
-### 2. Webhook Gateway Mode (Alpha)
+:::danger
+Webhooks are required to receive custom command events
+:::
+
+### 2. Webhook Gateway Mode
 
 In Webhook Gateway Mode, your script spins up a local HTTP server that waits for incoming POST webhooks pushed by ER:LC server hooks.
 *   **Pros:** Extremely fast (near real-time latency), highly efficient (no constant polling requests).
@@ -66,3 +70,7 @@ const client = new Client({
 ```
 
 When Webhook Gateway mode is enabled, the client spawns an internal Node.js HTTP server listening on the configured port and path. You can subscribe to the same events as you would in polling mode.
+
+:::danger
+It is recommended to still have polling enabled to receive the full suite of events. This is because webhooks only receive emergency call and custom command events.
+:::
