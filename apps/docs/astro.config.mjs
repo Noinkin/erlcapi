@@ -16,7 +16,10 @@ export default defineConfig({
 		starlight({
 			title: 'ERLCjs',
             customCss: [ './src/styles/custom.css' ],
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/noinkin/erlcapi' }],
+			social: [
+                { icon: 'github', label: 'GitHub', href: 'https://github.com/noinkin/erlcapi' },
+                { icon: 'discord', label: 'Discord', href: 'https://discord.gg/yMK7Szrn8Q' },
+            ],
 			sidebar: [
 				{
 					label: 'Guides',
