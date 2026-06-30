@@ -61,6 +61,8 @@ export enum ERLCEvents {
     staffRemove = 'STAFF_REMOVE',
     /** Emitted when a custom command is executed in-game */
     customCommand = 'CUSTOM_COMMAND',
+    /** Emitted when a user enters the webhook in-game */
+    webhookProbe = 'WEBHOOK_PROBE',
 }
 
 /**
@@ -103,13 +105,16 @@ export interface ClientEvents {
     /** Emitted when an emergency call is updated. */
     [ERLCEvents.emergencyCallUpdate]: [oldCall: EmergencyCall | null, newCall: EmergencyCall];
 
-    /** Emitted when a player is given a staff role */
+    /** Emitted when a player is given a staff role. */
     [ERLCEvents.staffAdd]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
-    /** Emitted when a player is removed from a staff role */
+    /** Emitted when a player is removed from a staff role. */
     [ERLCEvents.staffRemove]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
 
-    /** Emitted when a custom command is executed in-game */
-    [ERLCEvents.customCommand]: [command: string, argument: string];
+    /** Emitted when a custom command is executed in-game. */
+    [ERLCEvents.customCommand]: [userId: string, command: string, argument: string];
+
+    /** Emitted when a player enters the webhook in-game. */
+    [ERLCEvents.webhookProbe]: [];
 
     /** Emitted when an error is caught during polling or gateway operations. */
     error: [error: unknown];

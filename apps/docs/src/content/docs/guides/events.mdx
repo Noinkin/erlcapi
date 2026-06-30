@@ -81,3 +81,21 @@ Here is the full list of events emitted by ERLCjs.
 *   **`ERLCEvents.emergencyCallRemove`**
     *   **Description:** Emitted when an emergency call is cleared.
     *   **Parameters:** `[call: EmergencyCall]`
+
+### Staff
+*   **`ERLCEvents.staffAdd`**
+    *   **Description:** Emitted when a player receives a staff role.
+    *   **Parameters:** `[staff: Staff, type: 'Admin' | 'Mod' | 'Helper']`
+*   **`ERLCEvents.staffRemove`**
+    *   **Description:** Emitted when a player is removed from a staff role.
+    *   **Parameters:** `[staff: Staff, type: 'Admin' | 'Mod' | 'Helper']`
+
+### Custom Commands
+*   **`ERLCEvents.customCommand`**
+    *   **Description:** Emitted when a custom command is executed in-game.
+    *   **Parameters:** `[userId: string, command: string, argument: string]`
+
+### Webhooks
+*   **`ERLCEvents.webhookProbe`**
+    *   **Description:** Emitted when the webhook is entered in-game.
+    *   **Parameters:** `[]`

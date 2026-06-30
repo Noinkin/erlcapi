@@ -88,14 +88,18 @@ export class WebhookServer {
      * @param payload - Raw JSON payload received.
      */
     private handleGatewayEvent(payload: any) {
+        console.log(payload)
         const events = payload.events;
         for (const event of events) {
-            if (event.event === 'EmergencyCallStarted') {
+            console.log(event)
+            if (event.event === 'WebhookProbe') {
+                this.client.emit(ERLCEvents.webhookProbe);
+            } else if (event.event === 'EmergencyCallStarted') {
                 this.client.emergencyCalls.addCall(event.data);
             } else if (event.event === 'EmergencyCallEnded') {
                 this.client.emergencyCalls.removeCall(event.data);
             } else if (event.event === 'CustomCommand') {
-                this.client.emit(ERLCEvents.customCommand, event.data?.command, event.data?.argument);
+                this.client.emit(ERLCEvents.customCommand, event.data?.origin, event.data?.command, event.data?.argument);
             }
         }
     }
