@@ -1,3 +1,5 @@
+import type { Player } from "../structures/player";
+
 /**
  * Configuration options for the ERLCApi Client.
  * @public
@@ -367,4 +369,10 @@ export interface RawServerData {
      * Active vehicles spawned.
      */
     Vehicles?: RawVehicle[];
+}
+
+export interface InGameCommand {
+    name: string;
+    description?: string;
+    execute: (context: { player: Player; args: string[] }) => void;
 }

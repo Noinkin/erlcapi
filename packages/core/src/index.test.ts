@@ -10,7 +10,6 @@ const client = new Client({
 });
 
 client.on(ERLCEvents.vehicleAdd, (vehicle) => {
-    console.log(vehicle);
     if (vehicle.name === Vehicles.CHEVLON_COMMUTER_VAN_2006) {
         vehicle.owner.message('Restricted vehicle. Change.');
         setTimeout(() => {
@@ -27,3 +26,11 @@ client.on(ERLCEvents.vehicleAdd, (vehicle) => {
 client.on(ERLCEvents.playerJoin, (player) => {
     console.log(player);
 });
+
+client.registerCommand({
+    name: 'test',
+    execute: ({ player, args }) => {
+        console.log(`Player ${player.username} executed the test command with arguments: ${args.join(', ')}`);
+        player.message(`Hello ${player.username}, you executed the test command with arguments: ${args.join(', ')}`);
+    }
+})
