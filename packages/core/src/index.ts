@@ -37,3 +37,6 @@ export * from './errors/index.js';
 
 // Util
 export * from './util/index.js';
+
+// Enums
+export * from './enums/vehicles.js';
