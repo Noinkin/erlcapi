@@ -1,5 +1,5 @@
 import { EventEmitter } from 'node:events';
-import { type ClientOptions, type RawServerData } from '../types/index.js';
+import { type ClientOptions, type RawServerData, type InGameCommand } from '../types/index.js';
 import { RestManager } from '../rest/manager.js';
 import { ServerManager } from '../managers/servermanager.js';
 import { PlayerManager } from '../managers/playermanager.js';
@@ -115,7 +115,7 @@ export interface ClientEvents {
     [ERLCEvents.staffRemove]: [staff: Staff, type: 'Admin' | 'Mod' | 'Helper'];
 
     /** Emitted when a custom command is executed in-game. */
-    [ERLCEvents.customCommand]: [player: Player | string, command: string, args: string[]];
+    [ERLCEvents.customCommand]: [player: Player, command: string, args: string[]];
 
     /** Emitted when a player enters the webhook in-game. */
     [ERLCEvents.webhookProbe]: [];
@@ -153,6 +153,8 @@ export class Client extends EventEmitter<ClientEvents> {
     private readonly gateway?: WebhookServer;
     /** The interval for the periodic API polling loop. */
     private pollingInterval?: NodeJS.Timeout;
+    /** A collection of registered in-game commands. */
+    private inGameCommands = new Map<string, InGameCommand>();
 
     /**
      * Creates an instance of Client.
@@ -248,5 +250,29 @@ export class Client extends EventEmitter<ClientEvents> {
         if (this.gateway) {
             this.gateway.close();
         }
+    }
+
+    public registerCommand(command: InGameCommand) {
+        if (this.inGameCommands.has(command.name)) {
+            throw new Error(`Command with name "${command.name}" is already registered.`);
+        }
+        if (command.name.startsWith(';')) command.name = command.name.slice(1);
+        if (!command.name || !command.execute) {
+            throw new Error('Invalid command: must have a name and an execute function.');
+        }
+        if (this.inGameCommands.size === 0) this.handleCustomCommands();
+        this.inGameCommands.set(command.name, command);
+    }
+
+    private handleCustomCommands() {
+        this.on(ERLCEvents.customCommand, (player, commandName, args) => {
+            const command = this.inGameCommands.get(commandName.toLowerCase());
+            if (!command) return;
+            try {
+                command.execute({ player: player, args });
+            } catch (err) {
+                this.emit('error', err);
+            }
+        });
     }
 }
